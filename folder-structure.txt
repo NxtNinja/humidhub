@@ -1,0 +1,151 @@
+src/
+│
+├── app/
+│   ├── page.tsx                      
+│   ├── map/
+│   │   └── page.tsx
+│   ├── earthquakes/
+│   │   └── page.tsx
+│   ├── history/
+│   │   └── page.tsx
+│   ├── settings/
+│   │   └── page.tsx
+│   │
+│   ├── layout.tsx
+│   ├── loading.tsx
+│   ├── error.tsx
+│   ├── not-found.tsx
+│   └── globals.css
+│
+├── features/
+│   │
+│   ├── weather/
+│   │   ├── api/
+│   │   │   ├── weather.api.ts
+│   │   │   └── geocoding.api.ts
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── use-current-weather.ts
+│   │   │   ├── use-hourly-forecast.ts
+│   │   │   ├── use-daily-forecast.ts
+│   │   │   └── use-weather-history.ts
+│   │   │
+│   │   ├── queries/
+│   │   │   ├── weather.query.ts
+│   │   │   └── weather.query-keys.ts
+│   │   │
+│   │   ├── components/
+│   │   │   ├── current-weather-card.tsx
+│   │   │   ├── weather-stats.tsx
+│   │   │   ├── hourly-forecast.tsx
+│   │   │   ├── daily-forecast.tsx
+│   │   │   ├── weather-search.tsx
+│   │   │   ├── weather-history-chart.tsx
+│   │   │   └── sun-moon-card.tsx
+│   │   │
+│   │   ├── schemas/
+│   │   │   ├── weather.schema.ts
+│   │   │   └── geocoding.schema.ts
+│   │   │
+│   │   ├── constants/
+│   │   │   └── weather-codes.ts
+│   │   │
+│   │   └── types/
+│   │       ├── weather.types.ts
+│   │       └── geocoding.types.ts
+│   │
+│   ├── air-quality/
+│   │   ├── api/
+│   │   │   └── air-quality.api.ts
+│   │   │
+│   │   ├── hooks/
+│   │   │   └── use-air-quality.ts
+│   │   │
+│   │   ├── queries/
+│   │   │   ├── air-quality.query.ts
+│   │   │   └── air-quality.query-keys.ts
+│   │   │
+│   │   ├── components/
+│   │   │   └── environment-card.tsx
+│   │   │
+│   │   ├── schemas/
+│   │   │   └── air-quality.schema.ts
+│   │   │
+│   │   └── types/
+│   │       └── air-quality.types.ts
+│   │
+│   ├── earthquakes/
+│   │   ├── api/
+│   │   │   └── earthquake.api.ts
+│   │   │
+│   │   ├── hooks/
+│   │   │   └── use-earthquakes.ts
+│   │   │
+│   │   ├── queries/
+│   │   │   ├── earthquake.query.ts
+│   │   │   └── earthquake.query-keys.ts
+│   │   │
+│   │   ├── components/
+│   │   │   ├── earthquake-map.tsx
+│   │   │   ├── earthquake-list.tsx
+│   │   │   ├── earthquake-filters.tsx
+│   │   │   └── earthquake-summary.tsx
+│   │   │
+│   │   ├── schemas/
+│   │   │   └── earthquake.schema.ts
+│   │   │
+│   │   └── types/
+│   │       └── earthquake.types.ts
+│   │
+│   └── maps/
+│       ├── components/
+│       │   ├── weather-map.tsx
+│       │   ├── map-controls.tsx
+│       │   └── map-location-card.tsx
+│       │
+│       ├── hooks/
+│       │   └── use-map-layer.ts
+│       │
+│       └── utils/
+│           └── map-layers.ts
+│
+├── components/
+│   │
+│   ├── ui/
+│   │   └── ...shadcn components
+│   │
+│   ├── layout/
+│   │   ├── navbar.tsx
+│   │   ├── mobile-nav.tsx
+│   │   ├── page-container.tsx
+│   │   └── footer.tsx
+│   │
+│   └── shared/
+│       ├── loading-state.tsx
+│       ├── empty-state.tsx
+│       └── error-state.tsx
+│
+├── store/
+│   ├── location.atom.ts
+│   ├── settings.atom.ts
+│   └── favorites.atom.ts
+│
+├── providers/
+│   ├── query-provider.tsx
+│   ├── theme-provider.tsx
+│   └── app-provider.tsx
+│
+├── lib/
+│   ├── env.ts
+│   ├── fetcher.ts
+│   ├── query-client.ts
+│   └── utils.ts
+│
+├── config/
+│   ├── navigation.ts
+│   ├── site.ts
+│   └── constants.ts
+│
+└── types/
+    ├── common.ts
+    └── api.ts
