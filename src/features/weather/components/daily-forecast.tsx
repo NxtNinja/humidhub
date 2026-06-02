@@ -19,10 +19,12 @@ export function DailyForecast({ latitude, longitude }: DailyForecastProps) {
   if (isLoading) {
     return (
       <section className="py-6 sm:py-8 pb-8 flex flex-col">
-        <div className="h-4 w-32 animate-pulse bg-muted mb-6" />
-        <div className="space-y-4">
-          {[...Array(7)].map((_, i) => (
-            <div key={i} className="h-12 w-full animate-pulse border-b border-muted" />
+        <div className="flex items-center justify-between pb-4">
+          <div className="h-4 w-32 bg-primary/5 animate-pulse" />
+        </div>
+        <div className="mt-4 flex gap-6 overflow-hidden">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="min-w-24 md:min-w-28 h-40 animate-pulse bg-primary/5 rounded-2xl shrink-0" />
           ))}
         </div>
       </section>

@@ -18,14 +18,13 @@ export function HourlyForecast({ latitude, longitude }: Props) {
 
   if (isLoading) {
     return (
-      <section className="py-6 sm:py-8 border-b border-border/40 pb-8">
-        <div className="h-4 w-32 animate-pulse bg-muted mb-6" />
-        <div className="flex gap-4 overflow-hidden">
+      <section className="py-6 sm:py-8 border-b border-border/40 pb-8 flex flex-col">
+        <div className="flex items-center justify-between pb-4">
+          <div className="h-4 w-32 bg-primary/5 animate-pulse" />
+        </div>
+        <div className="mt-4 flex gap-6 overflow-hidden">
           {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="min-w-20 h-24 animate-pulse border-l border-muted pl-3"
-            />
+            <div key={i} className="min-w-24 md:min-w-28 h-40 animate-pulse bg-primary/5 rounded-2xl shrink-0" />
           ))}
         </div>
       </section>

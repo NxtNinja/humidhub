@@ -20,13 +20,14 @@ export function CurrentWeatherCard({
   if (isLoading) {
     return (
       <section className="py-6 sm:py-8 border-b border-border/40 pb-8">
-        <div className="h-24 sm:h-32 w-full max-w-sm animate-pulse bg-muted" />
-        <div className="flex gap-6 mt-8">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="h-12 w-24 animate-pulse border-l border-muted pl-4"
-            />
+        <div className="flex justify-between items-center mb-8">
+          <div className="h-4 w-32 bg-primary/5 animate-pulse" />
+          <div className="h-4 w-24 bg-primary/5 animate-pulse hidden sm:block" />
+        </div>
+        <div className="h-24 sm:h-32 w-48 sm:w-64 animate-pulse bg-primary/5 mb-8" />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 gap-x-6 pt-6 border-t border-border/40">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="h-10 w-full animate-pulse border-l-2 border-primary/20 pl-4 bg-primary/5" />
           ))}
         </div>
       </section>
