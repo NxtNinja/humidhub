@@ -1,5 +1,9 @@
-import Image from "next/image";
+import { LocationHero } from "@/features/location/components/location-hero";
 
 export default function Home() {
-  return <div className="">Hello</div>;
+  return (
+    <main className="">
+      <LocationHero />
+    </main>
+  );
 }
