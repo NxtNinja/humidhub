@@ -1,9 +1,9 @@
-import { LocationHero } from "@/features/location/components/location-hero";
+import { HomeContent } from "@/features/home/components/home-content";
 
 export default function Home() {
   return (
     <main className="">
-      <LocationHero />
+      <HomeContent />
     </main>
   );
 }

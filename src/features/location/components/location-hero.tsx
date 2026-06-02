@@ -13,46 +13,21 @@ import {
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 
-import { useCurrentLocation } from "../hooks/use-current-location";
 import { LocationInfoCard } from "./location-info-card";
+import { NominatimLocation } from "../types/nominatim.types";
 
-export function LocationHero() {
-  const { location, isLoading, error } = useCurrentLocation();
+type LocationHeroProps = {
+  location: NominatimLocation;
+};
+
+export function LocationHero({ location }: LocationHeroProps) {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
+
     return () => clearInterval(timer);
   }, []);
-
-  if (isLoading) {
-    return (
-      <section className="py-4 sm:py-6 border-b border-border/50 pb-6">
-        <div className="space-y-4">
-          <div className="h-4 w-32 animate-pulse bg-muted" />
-          <div className="h-12 sm:h-16 w-64 animate-pulse bg-muted" />
-          <div className="flex gap-4 mt-6">
-            {[...Array(4)].map((_, i) => (
-              <div
-                key={i}
-                className="h-10 w-24 animate-pulse border-l border-muted pl-4"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (error || !location) {
-    return (
-      <section className="py-4 sm:py-6 border-b border-border/50 pb-6">
-        <p className="font-mono text-xs uppercase text-destructive tracking-widest">
-          [ Error: Unable to detect location ]
-        </p>
-      </section>
-    );
-  }
 
   const primaryName =
     location.address.city ??
@@ -62,31 +37,33 @@ export function LocationHero() {
     "Current Location";
 
   return (
-    <section className="py-4 sm:py-6 flex flex-col border-b border-border/40 pb-6">
+    <section className="flex flex-col border-b border-border/40 pb-6 pt-4 sm:pt-6">
       {/* Top Meta Bar */}
       <div className="flex items-center justify-between pb-3">
         <div className="flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] uppercase">
           <MapPin className="h-3.5 w-3.5" />
+
           <span>{location.type || "SYS.LOC.DETECTED"}</span>
         </div>
+
         <p className="font-mono text-[10px] sm:text-xs font-medium text-muted-foreground uppercase tracking-wider">
           {format(time, "yyyy-MM-dd / HH:mm:ss")}
         </p>
       </div>
 
       {/* Massive Title Block */}
-      <div className="py-2 sm:py-4 flex flex-col gap-2">
-        <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter text-foreground uppercase leading-[0.85] break-words">
+      <div className="flex flex-col gap-2 py-2 sm:py-4">
+        <h1 className="font-heading text-5xl font-black uppercase leading-[0.85] tracking-tighter text-foreground wrap-break-words sm:text-6xl md:text-7xl">
           {primaryName}
         </h1>
 
-        <p className="font-mono text-[10px] sm:text-xs text-muted-foreground max-w-2xl leading-relaxed uppercase tracking-widest border-l border-primary/50 pl-3 mt-1 line-clamp-3">
+        <p className="mt-1 max-w-2xl border-l border-primary/50 pl-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground line-clamp-3 sm:text-xs">
           {location.display_name}
         </p>
       </div>
 
-      {/* Technical Data Grid (Wrapping) */}
-      <div className="mt-4 pt-4 border-t border-border/40 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-4 gap-x-6 pb-2">
+      {/* Technical Data Grid */}
+      <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-border/40 pb-2 pt-4 sm:grid-cols-3 lg:grid-cols-4">
         {location.address.country && (
           <LocationInfoCard
             icon={<Globe className="h-3 w-3" />}
