@@ -30,7 +30,11 @@ export function MobileNav() {
           </Button>
         </SheetTrigger>
 
-        <SheetContent side="right" showCloseButton={false} className="w-[280px] border-0 p-0 bg-background">
+        <SheetContent
+          side="right"
+          showCloseButton={false}
+          className="w-70 border-0 p-0 bg-background"
+        >
           {/* Header */}
           <SheetHeader className="px-6 pt-6 pb-4">
             <div className="flex items-center justify-between">
@@ -41,7 +45,11 @@ export function MobileNav() {
                 </SheetTitle>
               </div>
               <SheetClose asChild>
-                <Button variant="ghost" size="icon" className="rounded-full h-8 w-8">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full h-8 w-8"
+                >
                   <X className="h-4 w-4" />
                 </Button>
               </SheetClose>
@@ -67,7 +75,7 @@ export function MobileNav() {
                         : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
                   >
-                    <Icon className="h-[18px] w-[18px] shrink-0" />
+                    <Icon className="h-4.5 w-4.5 shrink-0" />
                     <span className="text-sm font-medium">{item.title}</span>
                     {isActive && (
                       <span className="ml-auto h-1.5 w-1.5 rounded-full bg-background/60" />

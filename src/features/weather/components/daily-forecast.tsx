@@ -24,7 +24,10 @@ export function DailyForecast({ latitude, longitude }: DailyForecastProps) {
         </div>
         <div className="mt-4 flex gap-6 overflow-hidden">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="min-w-24 md:min-w-28 h-40 animate-pulse bg-primary/5 rounded-2xl shrink-0" />
+            <div
+              key={i}
+              className="min-w-24 md:min-w-28 h-40 animate-pulse bg-primary/5 rounded-2xl shrink-0"
+            />
           ))}
         </div>
       </section>
@@ -52,7 +55,7 @@ export function DailyForecast({ latitude, longitude }: DailyForecastProps) {
         </div>
       </div>
 
-      <div className="mt-4 flex gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-4 px-4 md:mx-0 md:px-0">
+      <div className="mt-4 flex gap-6 overflow-x-auto pb-2 scrollbar-none [&::-webkit-scrollbar]:hidden -mx-4 px-4 md:mx-0 md:px-0">
         {forecast.map((day) => (
           <DailyForecastRow
             key={day.day}
