@@ -34,4 +34,26 @@ export type CurrentWeather = {
     cloud_cover: number;
     precipitation: number;
   };
+  hourly_units: {
+    time: string;
+    temperature_2m: string;
+    weather_code: string;
+  };
+  hourly: {
+    time: Array<string>;
+    temperature_2m: Array<number>;
+    weather_code: Array<number>;
+  };
+  daily_units: {
+    time: string;
+    weather_code: string;
+    temperature_2m_max: string;
+    temperature_2m_min: string;
+  };
+  daily: {
+    time: Array<string>;
+    weather_code: Array<number>;
+    temperature_2m_max: Array<number>;
+    temperature_2m_min: Array<number>;
+  };
 };

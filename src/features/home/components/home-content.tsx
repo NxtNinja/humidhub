@@ -4,6 +4,8 @@ import { LocationHero } from "@/features/location/components/location-hero";
 import { useCurrentLocation } from "@/features/location/hooks/use-current-location";
 
 import { CurrentWeatherCard } from "@/features/weather/components/current-weather-card";
+import { DailyForecast } from "@/features/weather/components/daily-forecast";
+import { HourlyForecast } from "@/features/weather/components/hourly-forecast";
 
 export function HomeContent() {
   const { location, isLoading, error } = useCurrentLocation();
@@ -26,10 +28,20 @@ export function HomeContent() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 md:space-y-8">
       <LocationHero location={location} />
 
       <CurrentWeatherCard
+        latitude={Number(location.lat)}
+        longitude={Number(location.lon)}
+      />
+
+      <HourlyForecast
+        latitude={Number(location.lat)}
+        longitude={Number(location.lon)}
+      />
+
+      <DailyForecast
         latitude={Number(location.lat)}
         longitude={Number(location.lon)}
       />

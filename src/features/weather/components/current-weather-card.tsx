@@ -1,6 +1,6 @@
 "use client";
 
-import { Droplets, Wind, Thermometer, Sun, Moon, Activity } from "lucide-react";
+import { Droplets, Wind, Thermometer, Sun, Moon } from "lucide-react";
 
 import { WEATHER_CODES } from "../constants/weather-codes";
 import { useCurrentWeather } from "../hooks/use-current-weather";
