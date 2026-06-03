@@ -54,11 +54,15 @@ export function EarthquakeCarousel({ earthquakes, selected, onSelect }: Props) {
               if (mag >= 5.0) {
                 severityText = "text-destructive";
                 severityBg = "bg-destructive";
-                bgGlow = isSelected ? "bg-destructive/10" : "hover:bg-destructive/5";
+                bgGlow = isSelected
+                  ? "bg-destructive/10"
+                  : "hover:bg-destructive/5";
               } else if (mag >= 3.0) {
                 severityText = "text-orange-500";
                 severityBg = "bg-orange-500";
-                bgGlow = isSelected ? "bg-orange-500/10" : "hover:bg-orange-500/5";
+                bgGlow = isSelected
+                  ? "bg-orange-500/10"
+                  : "hover:bg-orange-500/5";
               } else {
                 bgGlow = isSelected ? "bg-primary/10" : "hover:bg-primary/5";
               }
@@ -67,12 +71,14 @@ export function EarthquakeCarousel({ earthquakes, selected, onSelect }: Props) {
                 <button
                   key={quake.id}
                   onClick={() => handleSelect(quake)}
-                  className={`group w-[240px] sm:w-[280px] shrink-0 text-left p-4 rounded-lg border border-border/40 bg-transparent transition-colors duration-200 flex flex-col gap-3 relative overflow-hidden ${bgGlow} ${
+                  className={`group w-60 sm:w-70 shrink-0 text-left p-4 rounded-lg border border-border/40 bg-transparent transition-colors duration-200 flex flex-col gap-3 relative overflow-hidden ${bgGlow} ${
                     isSelected ? "ring-1 ring-foreground/30 bg-muted/10" : ""
                   }`}
                 >
                   {/* Glowing Top Indicator */}
-                  <div className={`absolute top-0 left-0 w-full h-[2px] opacity-60 ${severityBg} ${isSelected ? "opacity-100" : "group-hover:opacity-100 transition-opacity"}`} />
+                  <div
+                    className={`absolute top-0 left-0 w-full h-0.5 opacity-60 ${severityBg} ${isSelected ? "opacity-100" : "group-hover:opacity-100 transition-opacity"}`}
+                  />
 
                   {/* Meta Top row */}
                   <div className="flex items-start justify-between w-full">

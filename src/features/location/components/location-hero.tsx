@@ -37,7 +37,7 @@ export function LocationHero({ location }: LocationHeroProps) {
     "Current Location";
 
   return (
-    <section className="flex flex-col border-b border-border/40 pb-6 pt-4 sm:pt-6">
+    <section className="flex flex-col border-b border-border/40 pb-6 pt-4 sm:pt-6 mt-4">
       {/* Top Meta Bar */}
       <div className="flex items-center justify-between pb-3">
         <div className="flex items-center gap-2 text-primary font-bold tracking-[0.2em] text-[10px] uppercase">

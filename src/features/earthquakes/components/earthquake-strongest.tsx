@@ -53,7 +53,7 @@ export function EarthquakeStrongest({ earthquakes }: Props) {
             >
               {/* Glowing Top Indicator */}
               <div
-                className={`absolute top-0 left-0 w-full h-[2px] opacity-70 ${severityBg}`}
+                className={`absolute top-0 left-0 w-full h-0.5 opacity-70 ${severityBg}`}
               />
 
               <div className="flex items-start justify-between w-full">
