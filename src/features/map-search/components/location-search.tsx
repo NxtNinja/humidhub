@@ -31,7 +31,7 @@ export function LocationSearch({ onSelect }: Props) {
 
   return (
     <div className="relative">
-      <div className="mt-8 relative w-full max-w-2xl group">
+      <div className="mt-8 relative w-full group">
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-50">
           {showLoader ? (
             <Loader2 className="h-4 w-4 text-primary animate-spin" />
@@ -49,7 +49,7 @@ export function LocationSearch({ onSelect }: Props) {
       </div>
 
       {!isSelected && search.data && search.data.features.length > 0 && (
-        <div className="absolute z-50 top-full mt-2 w-full max-w-2xl">
+        <div className="absolute z-50 top-full mt-2 w-full">
           <ScrollArea className="h-80 rounded-lg border border-border/50 bg-card/95 backdrop-blur-xl shadow-2xl ring-1 ring-black/5">
             <div className="flex flex-col">
               {search.data.features.map((location, index) => (
