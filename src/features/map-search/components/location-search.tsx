@@ -16,12 +16,18 @@ type Props = {
 
 export function LocationSearch({ onSelect }: Props) {
   const [query, setQuery] = useState("");
+  const [isSelected, setIsSelected] = useState(false);
   const debouncedQuery = useDebounce(query, 400);
 
-  const search = useLocationSearch(debouncedQuery);
+  const search = useLocationSearch(isSelected ? "" : debouncedQuery);
   const isTyping = query !== debouncedQuery;
   const showLoader =
-    query.length >= 3 && (isTyping || search.isPending || search.isFetching);
+    query.length >= 3 && !isSelected && (isTyping || search.isPending || search.isFetching);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+    setIsSelected(false);
+  };
 
   return (
     <div className="relative">
@@ -35,27 +41,31 @@ export function LocationSearch({ onSelect }: Props) {
         </div>
         <Input
           type="text"
-          onChange={(e) => setQuery(e.target.value)}
+          value={query}
+          onChange={handleChange}
           placeholder="SEARCH CITY, PLACE OR COORDINATES..."
           className="pl-12 h-14 bg-card/50 backdrop-blur-sm border-border/40 font-mono text-[10px] sm:text-xs uppercase tracking-widest focus-visible:ring-1 focus-visible:ring-primary focus-visible:bg-card focus-visible:border-primary/50 transition-all rounded-md"
         />
       </div>
 
-      {search.data && search.data.features.length > 0 && (
-        <ScrollArea className="absolute z-50 mt-2 w-full max-w-2xl h-80 rounded-lg border border-border/50 bg-card/95 backdrop-blur-xl shadow-2xl ring-1 ring-black/5">
-          <div className="flex flex-col">
-            {search.data.features.map((location) => (
-              <SearchResultItem
-                key={location.properties.osm_id}
-                location={location}
-                onSelect={(selected) => {
-                  setQuery(""); // Clear UX
-                  onSelect(selected);
-                }}
-              />
-            ))}
-          </div>
-        </ScrollArea>
+      {!isSelected && search.data && search.data.features.length > 0 && (
+        <div className="absolute z-50 top-full mt-2 w-full max-w-2xl">
+          <ScrollArea className="h-80 rounded-lg border border-border/50 bg-card/95 backdrop-blur-xl shadow-2xl ring-1 ring-black/5">
+            <div className="flex flex-col">
+              {search.data.features.map((location, index) => (
+                <SearchResultItem
+                  key={`${location.properties.osm_id}_${index}`}
+                  location={location}
+                  onSelect={(selected) => {
+                    setQuery(selected.properties.name);
+                    setIsSelected(true);
+                    onSelect(selected);
+                  }}
+                />
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
       )}
     </div>
   );

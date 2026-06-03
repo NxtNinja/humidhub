@@ -4,8 +4,15 @@ import { Wind, Activity, ShieldAlert, Sun } from "lucide-react";
 
 import { useAirQuality } from "../hooks/use-air-quality";
 import { getAQIStatus } from "../utils/get-aqi-status";
-
 import { AirQualityStatCard } from "./air-quality-stat-card";
+import {
+  getPm25Status,
+  getPm10Status,
+  getNo2Status,
+  getUvStatus,
+  getCoStatus,
+  getOzoneStatus,
+} from "../utils/aqi-status-helpers";
 
 type Props = {
   latitude: number;
@@ -45,6 +52,13 @@ export function AirQualityCard({ latitude, longitude }: Props) {
   const { current, current_units } = data;
   const aqiStatus = getAQIStatus(current.european_aqi);
 
+  const pm25 = getPm25Status(current.pm2_5);
+  const pm10 = getPm10Status(current.pm10);
+  const no2 = getNo2Status(current.nitrogen_dioxide);
+  const uv = getUvStatus(current.uv_index);
+  const co = getCoStatus(current.carbon_monoxide);
+  const ozone = getOzoneStatus(current.ozone);
+
   return (
     <section className="py-6 sm:py-8 flex flex-col border-b border-border/40 pb-8">
       {/* Top Meta Bar */}
@@ -69,7 +83,6 @@ export function AirQualityCard({ latitude, longitude }: Props) {
             {aqiStatus}
           </p>
         </div>
-
         <div className="flex items-start mt-2">
           <h2 className="font-heading text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter text-foreground uppercase leading-none">
             {Math.round(current.european_aqi)}
@@ -80,39 +93,52 @@ export function AirQualityCard({ latitude, longitude }: Props) {
         </div>
       </div>
 
-      {/* Technical Data Grid */}
+      {/* Pollutant Data Grid */}
       <div className="mt-6 pt-6 border-t border-border/40 grid grid-cols-2 sm:grid-cols-3 gap-y-6 gap-x-6">
         <AirQualityStatCard
           icon={<Activity className="h-3 w-3" />}
           label="PM2.5"
           value={`${current.pm2_5} ${current_units.pm2_5}`}
+          status={pm25.status}
+          hint={pm25.hint}
         />
         <AirQualityStatCard
           icon={<Wind className="h-3 w-3" />}
           label="PM10"
           value={`${current.pm10} ${current_units.pm10}`}
+          status={pm10.status}
+          hint={pm10.hint}
         />
         <AirQualityStatCard
           icon={<ShieldAlert className="h-3 w-3" />}
           label="NO₂"
           value={`${current.nitrogen_dioxide} ${current_units.nitrogen_dioxide}`}
+          status={no2.status}
+          hint={no2.hint}
         />
         <AirQualityStatCard
           icon={<Sun className="h-3 w-3" />}
           label="UV Index"
           value={`${current.uv_index} ${current_units.uv_index}`}
+          status={uv.status}
+          hint={uv.hint}
         />
         <AirQualityStatCard
           icon={<Activity className="h-3 w-3" />}
           label="CO"
           value={`${current.carbon_monoxide} ${current_units.carbon_monoxide}`}
+          status={co.status}
+          hint={co.hint}
         />
         <AirQualityStatCard
           icon={<Wind className="h-3 w-3" />}
           label="Ozone"
           value={`${current.ozone} ${current_units.ozone}`}
+          status={ozone.status}
+          hint={ozone.hint}
         />
       </div>
     </section>
   );
 }
+
