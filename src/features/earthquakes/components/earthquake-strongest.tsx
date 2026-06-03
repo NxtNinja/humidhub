@@ -49,11 +49,11 @@ export function EarthquakeStrongest({ earthquakes }: Props) {
           return (
             <div
               key={quake.id}
-              className="group relative flex flex-col gap-3 p-5 rounded-xl border border-border/50 bg-card overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+              className="group relative flex flex-col gap-3 p-5 rounded-lg border border-border/40 bg-transparent overflow-hidden transition-colors hover:bg-muted/10"
             >
               {/* Glowing Top Indicator */}
               <div
-                className={`absolute top-0 left-0 w-full h-0.75 opacity-80 ${severityBg}`}
+                className={`absolute top-0 left-0 w-full h-[2px] opacity-70 ${severityBg}`}
               />
 
               <div className="flex items-start justify-between w-full">
@@ -90,7 +90,7 @@ export function EarthquakeStrongest({ earthquakes }: Props) {
                 </div>
               </div>
 
-              <div className="mt-1 flex items-start gap-2 bg-muted/10 p-2.5 rounded-md border border-border/30">
+              <div className="mt-1 flex items-start gap-2 pt-2">
                 <MapPin className="h-3.5 w-3.5 shrink-0 text-muted-foreground mt-0.5" />
                 <span className="font-mono text-[10px] uppercase tracking-wider text-foreground leading-snug line-clamp-2 opacity-90">
                   {quake.properties.place}
