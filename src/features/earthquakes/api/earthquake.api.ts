@@ -1,8 +1,8 @@
-import { Earthquake } from "../types/earthquake.types";
+import { EarthquakeResponse } from "../types/earthquake.types";
 
-export async function getRecentEarthquakes(): Promise<Earthquake> {
+export async function getRecentEarthquakes(): Promise<EarthquakeResponse> {
   const response = await fetch(
-    "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&limit=10",
+    "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&limit=50",
   );
 
   if (!response.ok) {

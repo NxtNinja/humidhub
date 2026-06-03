@@ -1,17 +1,17 @@
-import { Earthquake } from "../types/earthquake.types";
+import { EarthquakeResponse } from "../types/earthquake.types";
 
 type Props = {
-  data: Earthquake;
+  data: EarthquakeResponse;
 };
 
 export function EarthquakeStats({ data }: Props) {
   const eventsCount = data.features.length;
-  
+
   let strongest = 0;
   let totalMag = 0;
   let tsunamiCount = 0;
 
-  data.features.forEach(quake => {
+  data.features.forEach((quake) => {
     const mag = quake.properties.mag || 0;
     if (mag > strongest) strongest = mag;
     totalMag += mag;
