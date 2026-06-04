@@ -122,10 +122,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-border/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
-            © {new Date().getFullYear()}. All rights reserved.
-          </p>
+        <div className="pt-8 border-t border-border/20 flex flex-col sm:flex-row items-center justify-center gap-4">
           <div className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
             Made with <span className="text-red-500">♥</span> by{" "}
             <Link
