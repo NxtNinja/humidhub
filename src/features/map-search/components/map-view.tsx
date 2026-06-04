@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Map, { Marker, MapRef } from "react-map-gl/maplibre";
 import { MapPin } from "lucide-react";
 import { SearchLocation } from "../types/search-location.types";
@@ -12,8 +12,10 @@ type Props = {
 export function MapView({ selectedLocation }: Props) {
   const mapRef = useRef<MapRef>(null);
 
+  const [mapLoaded, setMapLoaded] = useState(false);
+
   useEffect(() => {
-    if (!selectedLocation) return;
+    if (!selectedLocation || !mapLoaded) return;
 
     const [longitude, latitude] = selectedLocation.geometry.coordinates;
 
@@ -22,17 +24,18 @@ export function MapView({ selectedLocation }: Props) {
       zoom: 12,
       duration: 2000,
     });
-  }, [selectedLocation]);
+  }, [selectedLocation, mapLoaded]);
 
   return (
     <div className="mt-8 overflow-hidden w-full h-[400px] sm:h-[500px] rounded-xl border border-border/40 ring-1 ring-white/5 relative shadow-xl">
       <Map
         ref={mapRef}
         initialViewState={{
-          longitude: 78.9629,
-          latitude: 20.5937,
-          zoom: 4,
+          longitude: selectedLocation ? selectedLocation.geometry.coordinates[0] : 78.9629,
+          latitude: selectedLocation ? selectedLocation.geometry.coordinates[1] : 20.5937,
+          zoom: selectedLocation ? 12 : 4,
         }}
+        onLoad={() => setMapLoaded(true)}
         style={{ width: "100%", height: "100%" }}
         mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
       >

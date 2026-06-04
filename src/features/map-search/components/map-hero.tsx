@@ -1,12 +1,15 @@
 "use client";
 
 import { Globe2 } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { useSetAtom } from "jotai";
 
 import { LocationSearch } from "./location-search";
 import { LocationDetails } from "./location-details";
 import { MapView } from "./map-view";
 import { SearchLocation } from "../types/search-location.types";
+import { historyAtom } from "@/features/history/store/history-store";
 
 import { CurrentWeatherCard } from "@/features/weather/components/current-weather-card";
 import { AirQualityCard } from "@/features/air-quality/components/air-quality-card";
@@ -14,16 +17,69 @@ import { HourlyForecast } from "@/features/weather/components/hourly-forecast";
 import { DailyForecast } from "@/features/weather/components/daily-forecast";
 
 export function MapHero() {
-  const [selectedLocation, setSelectedLocation] =
-    useState<SearchLocation | null>(null);
+  const searchParams = useSearchParams();
+  const setHistory = useSetAtom(historyAtom);
+
+  const [selectedLocation, setSelectedLocation] = useState<SearchLocation | null>(() => {
+    const latParam = searchParams.get("lat");
+    const lonParam = searchParams.get("lon");
+    const nameParam = searchParams.get("name");
+
+    if (latParam && lonParam && nameParam) {
+      return {
+        type: "Feature",
+        properties: {
+          osm_type: "node",
+          osm_id: Date.now(),
+          osm_key: "place",
+          osm_value: "city",
+          type: "city",
+          name: nameParam,
+          country: "",
+          countrycode: "",
+        },
+        geometry: {
+          type: "Point",
+          coordinates: [parseFloat(lonParam), parseFloat(latParam)],
+        },
+      };
+    }
+    return null;
+  });
 
   const weatherRef = useRef<HTMLDivElement>(null);
 
   const lat = selectedLocation?.geometry.coordinates[1];
   const lon = selectedLocation?.geometry.coordinates[0];
 
+  useEffect(() => {
+    const latParam = searchParams.get("lat");
+    const lonParam = searchParams.get("lon");
+    const nameParam = searchParams.get("name");
+
+    if (latParam && lonParam && nameParam) {
+      // Give the map time to render, then scroll to data
+      setTimeout(() => {
+        weatherRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 600);
+    }
+  }, [searchParams]);
+
   const handleSelect = (location: SearchLocation) => {
     setSelectedLocation(location);
+    
+    // Save to history (don't deduplicate so we can count frequencies)
+    setHistory((prev) => {
+      return [
+        {
+          id: String(location.properties.osm_id),
+          location,
+          timestamp: Date.now(),
+        },
+        ...prev,
+      ].slice(0, 50); // Keep last 50 items
+    });
+
     // Give the map flyTo animation time to start, then scroll to data
     setTimeout(() => {
       weatherRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
