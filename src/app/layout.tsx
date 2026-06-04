@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AppProvider } from "@/providers/app-provider";
 import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 
 const outfitHeading = Outfit({
   subsets: ["latin"],
@@ -52,6 +53,7 @@ export default function RootLayout({
           <div className="w-full max-w-3xl mx-auto flex-1 flex flex-col px-4 md:px-6">
             <main className="flex-1">{children}</main>
           </div>
+          <Footer />
         </AppProvider>
       </body>
     </html>
