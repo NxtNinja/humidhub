@@ -1,4 +1,4 @@
-import { Home, Map, Mountain, History } from "lucide-react";
+import { Home, Map, Mountain, History, BookOpen } from "lucide-react";
 
 export const navigation = [
   {
@@ -20,5 +20,10 @@ export const navigation = [
     title: "History",
     href: "/history",
     icon: History,
+  },
+  {
+    title: "Metrics",
+    href: "/metrics",
+    icon: BookOpen,
   },
 ];
