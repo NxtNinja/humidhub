@@ -191,7 +191,7 @@ const MetricCard = ({
     <div className={`flex flex-col gap-3 p-5 rounded-xl border border-border/50 bg-card/30 hover:bg-card/50 transition-colors`}>
       <div className="flex items-center gap-2 pb-2 border-b border-border/30">
         <div className={`p-1.5 rounded-md ${currentAccent}`}>
-          {React.cloneElement(icon as React.ReactElement, { className: "h-4 w-4" })}
+          {React.cloneElement(icon as React.ReactElement<any>, { className: "h-4 w-4" })}
         </div>
         <h3 className="font-mono text-xs font-bold tracking-widest uppercase text-foreground">
           {title}
