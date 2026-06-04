@@ -32,7 +32,7 @@ export function EarthquakeStrongest({ earthquakes }: Props) {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {strongest.map((quake, index) => {
           const mag = quake.properties.mag ?? 0;
           let severityColor = "text-primary border-primary";
@@ -49,7 +49,7 @@ export function EarthquakeStrongest({ earthquakes }: Props) {
           return (
             <div
               key={quake.id}
-              className="group relative flex flex-col gap-3 p-5 rounded-lg border border-border/40 bg-transparent overflow-hidden transition-colors hover:bg-muted/10"
+              className="group relative flex flex-col gap-3 p-4 sm:p-5 rounded-lg border border-border/40 bg-transparent overflow-hidden transition-colors hover:bg-muted/10"
             >
               {/* Glowing Top Indicator */}
               <div
@@ -62,26 +62,26 @@ export function EarthquakeStrongest({ earthquakes }: Props) {
                     Magnitude
                   </span>
                   <div
-                    className={`font-heading text-4xl font-black leading-none tracking-tighter ${severityColor.split(" ")[0]}`}
+                    className={`font-heading text-3xl sm:text-4xl font-black leading-none tracking-tighter ${severityColor.split(" ")[0]}`}
                   >
                     {mag.toFixed(1)}
                   </div>
                 </div>
 
-                <div className="flex flex-col items-end gap-1.5">
+                <div className="flex flex-col items-end gap-1.5 shrink-0">
                   <span
-                    className={`font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-sm font-black bg-muted/50 text-muted-foreground`}
+                    className={`font-mono text-[9px] sm:text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded-sm font-black bg-muted/50 text-muted-foreground`}
                   >
                     #{index + 1}
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between border-t border-border/40 pt-3 mt-1">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-t border-border/40 pt-3 mt-1 gap-1">
                 <span className="font-mono text-[9px] text-muted-foreground uppercase tracking-widest font-semibold">
                   SIG: {quake.properties.sig}
                 </span>
-                <div className="font-mono text-[10px] text-foreground uppercase tracking-wider text-right font-medium">
+                <div className="font-mono text-[9px] sm:text-[10px] text-foreground uppercase tracking-wider font-medium opacity-80">
                   {formatDistanceToNow(new Date(quake.properties.time)).replace(
                     "about ",
                     "",
